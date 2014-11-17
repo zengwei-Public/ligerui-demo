@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Menus>
+  <Menu id="999_" name="测试" url="" parentid="0" menulevel="0"></Menu>
+  <Menu id="999_001_" name="测试" url="~/Test/Test" parentid="999_" menulevel="1"></Menu>
+  <Menu id="999_002_" name="测试列表" url="~/Test/Test/TestList" parentid="999_" menulevel="1"></Menu>
+  <Menu id="999_003_" name="列表测试1" url="~/Currency/Index" parentid="999_" menulevel="1"></Menu>
+  <Menu id="999_003_001_" name="列表测试11" url="~/Currency/Index" parentid="999_003_" menulevel="2"></Menu>
+</Menus>

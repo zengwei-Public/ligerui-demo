@@ -1,0 +1,87 @@
+﻿.aq_box
+{
+    font-size: 12px;
+    font-family: "宋体" Arial;
+    position: relative;
+    height: 100%;
+    display: inline;
+    background-color: #f3f3f3;
+}
+.span
+{
+    display: inline-block;
+    line-height: 20px;
+    height: 20px;
+    vertical-align: top;
+    padding: 2px 2px 0 0;
+}
+.aq_box .textbox
+{
+    height: 18px;
+    line-height: 18px;
+    padding-left: 2px;
+    clear:both;
+}
+.aq_box.hover .textbox
+{
+    border: 2px solid #45A4DB;
+    background-color: #f3f3f3;
+}
+.aq_box.hover .ui-icon-date,
+.aq_box.hover .ui-icon-search,
+.aq_box.hover .ui-icon-mail,
+.aq_box.hover .ui-icon-drop
+{
+    filter: alpha(opacity=50);
+    -moz-opacity: 0.5;
+}
+/* states and images */
+.ui-icon-date,.ui-icon-search,.ui-icon-mail,.ui-icon-drop
+{
+    width: 16px;
+    height: 20px;
+    display: block;
+    text-indent: -99999px;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 1px;
+    top: -3px\9;
+    *top: 4px !important;
+    clear: both;
+    cursor: pointer;
+    border:0px solid red;
+}
+.ui-icon-date1
+{
+     top: -2px;
+     top: -4px\9;
+     *top: 2px !important;
+     background-image: url(images/datePicker.gif);
+}
+.ui-icon-search1
+{
+     background-image: url(images/search.png);
+}
+.ui-icon-mail1
+{
+     background-image: url(images/mail.png);
+}
+.ui-icon-drop1
+{
+     width: 22px\9;   
+     top: -6px\0/;/* IE8 only */
+     *top: 1px !important;
+     height: 24px\9;
+     background-image: url(images/drop_down_s.jpg); 
+     *background-image: url(images/drop_down_s_ie7.jpg) !important;
+}
+:root .ui-icon-drop1   
+{
+     top: -5px\9; 
+} /* IE9 only */
+
+.watermark
+{
+    color: #999;
+}

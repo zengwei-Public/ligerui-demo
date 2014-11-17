@@ -1,0 +1,39 @@
+﻿.iButton
+{
+    font-size: 12px;
+    font-family: "\5fae\8f6f\96c5\9ed1" , "Times New Roman" ,Tahoma,Helvetica, Arial,sans-serif;
+    background: transparent url(images/btn_left.gif) no-repeat 0px 0px; /*左边背景图片*/
+    color: #000;
+    display: block;
+    float: right;
+    height: 22px; /*display:block;float:left; height:22px;保证在各种浏览器上有一致的高度*/
+    margin: 0px 3px;
+    text-align: center;
+    cursor: pointer;
+}
+.iButton span
+{
+    background: transparent url(images/btn_right.gif) no-repeat right top; /*右边背景图片*/
+    padding: 0px 8px; /*不写button时padding*/
+    display: block;
+    line-height: 22px; /*保证高度是22px;*/
+    border: 0px;
+}
+.iButton input
+{
+    font-size: 12px;
+    background-color: transparent;
+    background-position: left center;
+    background-repeat: no-repeat;
+    text-indent: 16px;
+    text-indent: 0px\9; /*非IE浏览器文本缩进16px;*/
+    margin: 0px; /*margin: 0px -18px 0px -6px\9; 保证按钮的宽度一致*/
+    padding: 0px;
+    border-width: 0px;
+    height: 22px; /*保证高度是22px;*/
+    cursor: pointer;
+}
+.iButton input.search
+{
+    background-image: url(images/search.png);
+}

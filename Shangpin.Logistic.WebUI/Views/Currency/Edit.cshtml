@@ -1,0 +1,281 @@
+﻿@model Shangpin.Logistic.WebUI.Models.CurrencyFormModel
+@{
+    ViewBag.Title = "_Edit";
+    Layout = "~/Views/Shared/_Layout_LigerUI.cshtml";
+}
+
+@section HeaderScripts
+{
+    <script src="~/Scripts/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/common/jquery.validate.setdefault.js" type="text/javascript"></script>
+}
+
+@using (Html.BeginForm())
+{
+    <div id="form1" class="liger-form l-form" ligeruiid="form1">
+        @*<div id="errorLabelContainer" class="l-text-invalid">
+            
+        </div>*@
+        <div class="l-form-container">
+            <div class="l-group l-group-hasicon">
+                <img src="@Url.Content("~/Content/ligerUI/skins/icons/communication.gif")">
+                <span>
+                    货币信息
+                </span>
+                <div class="togglebtn">
+                </div>
+            </div>
+            <ul class="form_li clr">
+                <li class="l-fieldcontainer l-fieldcontainer-first" fieldindex="1">
+                    <ul class="clr">
+                        <li class="txt_li">
+                           @Html.LabelFor(m => m.CurrencyNumber)：
+                        </li>
+                        <li id="Form1000|1" class="input_li">
+                            <div class="l-text">
+                                @Html.TextBoxFor(m => m.CurrencyNumber, new { @class = "l-text-field" })
+                                <div class="l-text-l">
+                                </div>
+                                <div class="l-text-r">
+                                    @Html.ValidationMessageFor(m => m.CurrencyNumber)
+                                </div>
+                            </div>
+                        </li>
+                        <li class="star_li">
+                            <span class="l-star">
+                                *
+                            </span>
+                        </li>
+                        <li class="star_li">
+                        </li>
+                    </ul>
+                </li>
+                <li class="l-fieldcontainer" fieldindex="2">
+                    <ul class="clr">
+                        <li class="txt_li">
+                            @Html.LabelFor(m => m.CurrencyName)：
+                        </li>
+                        <li id="Form1000|1" class="input_li">
+                            <div class="l-text">
+                                @Html.TextBoxFor(m => m.CurrencyName, new { @class = "l-text-field" })
+                                <div class="l-text-l">
+                                </div>
+                                <div class="l-text-r">
+                                </div>
+                            </div>
+                        </li>
+                        <li class="star_li">
+                            <span class="l-star">
+                                *
+                            </span>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="form_li clr">
+                <li class="l-fieldcontainer l-fieldcontainer-first" fieldindex="3">
+                    <ul class="clr">
+                        <li class="txt_li">
+                            @Html.LabelFor(m => m.CurrencySymbo)：
+                        </li>
+                        <li id="Form1000|1" class="input_li">
+                            <div class="l-text">
+                                @Html.TextBoxFor(m => m.CurrencySymbo, new { @class = "l-text-field" })
+                                <div class="l-text-l">
+                                </div>
+                                <div class="l-text-r">
+                                </div>
+                            </div>
+                        </li>
+                        <li class="star_li">
+                            <span class="l-star">
+                                *
+                            </span>
+                        </li>
+                    </ul>
+                </li>
+                <li class="l-fieldcontainer" fieldindex="4">
+                    <ul class="clr">
+                        <li class="txt_li">
+                            @Html.LabelFor(m => m.CurrencyCode)：
+                        </li>
+                        <li id="Form1000|1" class="input_li">
+                            <div class="l-text">
+                                @Html.TextBoxFor(m => m.CurrencyCode, new { @class = "l-text-field" })
+                                <div class="l-text-l">
+                                </div>
+                                <div class="l-text-r">
+                                </div>
+                            </div>
+                        </li>
+                        <li class="star_li">
+                            <span class="l-star">
+                                *
+                            </span>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="form_li clr">
+                <li class="l-fieldcontainer  l-fieldcontainer-first" fieldindex="5">
+                    <ul class="clr">
+                        <li class="txt_li">
+                            @Html.LabelFor(m => m.CurrencyExchangRate)：
+                        </li>
+                        <li id="Form1000|5" class="input_li">
+                            <div class="l-text">
+                                @Html.TextBoxFor(m => m.CurrencyExchangRate, new { @class = "l-text-field" })
+                                <div class="l-text-l">
+                                </div>
+                                <div class="l-text-r">
+                                </div>
+                            </div>
+                        </li>
+                        <li class="star_li">
+                            <span class="l-star">
+                                *
+                            </span>
+                        </li>
+                    </ul>
+                </li>
+                <li class="l-fieldcontainer" fieldindex="6">
+                    <ul class="form_li clr">
+                        <li class="txt_li">
+                            @Html.LabelFor(m => m.CurrencyCountry)：
+                        </li>
+                        <li id="Form1000|5" class="input_li">
+                            <div class="l-text">
+                                @Html.TextBoxFor(m => m.CurrencyCountry, new { @class = "l-text-field" })
+                                <div class="l-text-l">
+                                </div>
+                                <div class="l-text-r">
+                                </div>
+                            </div>
+                        </li>
+                        <li class="star_li">
+                            <span class="l-star">
+                                *
+                            </span>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="form_li clr">
+                <li class="l-fieldcontainer l-fieldcontainer-first" fieldindex="7">
+                    <ul class="clr">
+                        <li class="txt_li">
+                            @Html.LabelFor(m => m.IsDefault)：
+                        </li>
+                        <li id="Form1000|7" class="input_li">
+                           
+                                @Html.RadioButtonFor(x => x.IsDefault, "true") 是
+                                @Html.RadioButtonFor(x => x.IsDefault, "false", new { @checked = true }) 否
+                                <div class="l-text-l">
+                                </div>
+                                <div class="l-text-r">
+                                </div>
+                        </li>
+                        <li class="star_li">
+                            <span class="l-star">
+                                *
+                            </span>
+                        </li>
+                    </ul>
+                </li>
+                <li class="l-fieldcontainer" fieldindex="8">
+                    <ul class="form_li clr">
+                        <li class="txt_li">
+                            @Html.LabelFor(m => m.Weight)：
+                        </li>
+                        <li id="Form1000|8" class="input_li">
+                            <div class="l-text">
+                                @Html.TextBoxFor(m => m.Weight, new { @class = "l-text-field" })
+                                <div class="l-text-l">
+                                </div>
+                                <div class="l-text-r">
+                                </div>
+                            </div>
+                        </li>
+                        <li class="star_li">
+                            <span class="l-star">
+                                *
+                            </span>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="form_li clr">
+                <li class="l-fieldcontainer l-fieldcontainer-first" fieldindex="9">
+                    <ul class="clr">
+                        <li class="txt_li">
+                            @Html.LabelFor(m => m.Remark)：
+                        </li>
+                        <li id="Form1000|9" class="all_li">
+                            <div class="l-text">
+                                @Html.TextAreaFor(m => m.Remark, new { @class = "l-textarea" })
+                                <div class="l-text-l">
+                                </div>
+                                <div class="l-text-r">
+                                </div>
+                            </div>
+                        </li>
+                        <li class="star_li">
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="form_li clr">
+                <li class="l-fieldcontainer l-fieldcontainer-first" fieldindex="9">
+                    <ul class="clr">
+                        <li id="Form1000|9" class="submit_li">
+                            <input type="submit" value="提交" class="l-button l-button-submit">
+                            <input type="reset" value="重置" class="l-button l-button-reset">
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+}
+@section FooterScripts
+{
+    <script type="text/javascript">
+        
+        $(function () {
+            $("#pageloading").hide();
+
+            $('form').submit(function () {
+                if ($(this).valid()){
+                    var win = parent || window;
+                    $.ajax({
+                        url: this.action,
+                        type: "POST",
+                        data: $(this).serialize(),
+                        beforeSend: function (a, b, c) {
+                            win.LG.showLoading('正在保存数据中...');
+                        },
+                        complete: function () {
+                            win.LG.hideLoading();
+                        },
+                        success: function (result) {
+                            if (result.Successed) {
+                                LG.showSuccess('保存成功', function () {
+                                    win.LG.closeAndReloadParent(null, "Currency");
+                                }); 
+                            }
+                            else {
+                                LG.showError('错误:' + result.Message);
+                            }
+                        },
+                        error: function (result) {
+                            LG.tip('发现系统错误 <BR>错误码：' + result.status);
+                        }
+                    });
+                }
+                return false;
+            });           
+        })
+    </script>
+
+}

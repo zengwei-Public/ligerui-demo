@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "访问被禁止!";
+    Layout = "~/Views/Shared/_Layout_Error.cshtml";
+}
+
+<script type="text/javascript">
+    window.onload = function () {
+    //    setTimeout(window.location = "@Url.Action("GoLogin","Home")", 500);
+    }
+</script>
+<h1 class="head">
+    @ViewBag.Title
+</h1>
+<div class="body">
+    <div class="icon_error">
+    </div>
+    <div class="info">
+        <div style="padding-top:50px;">
+            "很遗憾，你的访问未授权，请联系管理员!"
+        </div>
+    </div>
+</div>

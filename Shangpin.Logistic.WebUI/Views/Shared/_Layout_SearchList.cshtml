@@ -1,0 +1,57 @@
+﻿
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/Content/page_frame.css?" + DateTime.Now.ToString("yyyyMMdd"))" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.8.2.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/references/jquery.cookie.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/references/jquery.unobtrusive-ajax.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/plugins/ymPrompt/ymPrompt_Ex.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/plugins/calendar/WdatePicker.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/common/TMS.Util.js?" + DateTime.Now.ToString("yyyyMMdd"))"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/common/TMS.Page.js?" + DateTime.Now.ToString("yyyyMMdd"))"></script>
+    @RenderSection("head", false)
+</head>
+<body id="Page_SearchList">
+    <iframe id="ifrDownload" style="display: none"></iframe>
+    <div class="container">
+        @if (IsSectionDefined("search"))
+        {
+            <!-- 搜索项 -->
+            <div class="box boxSearch">
+                <div class="box_title">
+                    @* <span class="flod"></span>*@
+                    <h1 class="s">@(ViewBag.SearchTitle ?? "搜索项")</h1>
+                    <div id="helpfile" style="float: right;">
+                        @*<a id="help" style="cursor:help" href="#" onclick="downloadfile()">帮助</a>*@
+                    </div>
+                </div>
+                <div class="search">
+                    @RenderSection("search")
+                </div>
+            </div>
+        }
+        @RenderBody()
+        @if (IsSectionDefined("list"))
+        {
+                <!-- 列表 -->
+            <div class="box">
+                <div class="box_title">
+                    @if (IsSectionDefined("search"))
+                    {
+                        <span class="showsearch"><a class="down" href="javascript:void(0);"></a></span>
+                    }
+                    <h1 class="l">@ViewBag.Title</h1>
+                </div>
+                <div class="tablelist">
+                    @RenderSection("list")
+                </div>
+            </div>
+        }
+    </div>
+    <div id="Loading" style="filter: alpha(opacity=50); opacity: 0.5;">
+        <img src="@Url.Content("~/Content/imgs/loading/loadingbar.gif")" />
+    </div>
+</body>
+</html>

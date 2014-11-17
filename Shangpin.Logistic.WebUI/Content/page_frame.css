@@ -1,0 +1,188 @@
+﻿html,body{font-size:12px; background:#fff; margin:0; padding:0;}
+body{ padding:5px; font-family:"Microsoft YaHei";}
+
+div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, /*input, textarea,*/ p, blockquote, th, td
+{margin: 0;padding: 0;list-style:none;}
+
+a{ text-decoration:none; color:#203F6A;}
+a:hover{ color:#f00!important;}
+.blod{ font-weight:bold;}
+.red{ color:Red;}
+.blue{ color:Blue;}
+.yellow{ color:Yellow;}
+.green{ color:Green;}
+
+.clear{ clear:both;}
+.hide{ display:none;}
+.center{ text-align:center;}
+.tleft{ text-align:left;}
+.tright{ text-align:right;}
+.fleft{ float:left;}
+.fright{ float:right;}
+.split{ width:10px; height:10px;}
+
+.container{}
+
+
+.box{}
+.box .box_title{ border-bottom:2px solid #4474BB; clear:both; overflow:auto;}
+.box .box_title h1{ display:inline-block;font-size:20px; font-weight:bold; width:30%; min-width:150px; border-bottom:0px solid #eee;  white-space:nowrap;
+margin:0; padding:0; text-indent:5px; line-height1:22px; color:#4474BB; padding-bottom:1px;}
+.box .box_title h1.s{background1:url(images/icons/search.png) 3px 2px no-repeat;float: left; }
+.box .box_title h1.l{background1:url(images/icons/list.png) 3px 2px no-repeat; }
+.box .box_title .flod{ width:12px;height:12px;background:url(imgs/sprites/Main_sprites.png) -31px -429px;overflow:hidden; 
+display:block; float:right; margin:6px 8px 0 0; cursor:pointer;}
+.box .box_title .showsearch{ float:right; display:block; margin:6px 8px 0 0; cursor:pointer;}
+.box .box_title .showsearch a.down{ width:16px; height:16px; display:inline-block; background:url(images/background/updown.png) right top;}
+.box .box_title .showsearch a.up{ width:16px; height:16px; display:inline-block; background:url(images/background/updown.png) left top;}
+
+/***Error***/
+.Error{}
+.Error .head{ height:100px; line-height:100px; font-size:25px; text-indent:30px; font-weight:bold; background:url(images/background/error.jpg) left top;}
+.Error .body{ width:800px; margin:0 auto;color:#bbb;font-size:24px; line-height:50px;}
+.Error .icon_404{ height:156px; width:156px; float:left;background:url(images/background/error.jpg) -0px  -110px; margin:10px 20px;}
+.Error .icon_error{ height:156px; width:156px; float:left;background:url(images/background/error.jpg) -180px  -110px; margin:10px 20px;}
+
+/***表单btn text***/
+.button1{ border:1px solid #3275AA; margin:0; padding:0 5px;*padding:0; color:#fff; height:23px; line-height:23px; *line-height:20px; background:#7CC1ED url(images/background/btn_Bg.gif) top;border-radius: 3px;}
+.textbox{border1:#aaa 1px solid;height1:18px;line-height1:18px;}
+
+/***线路计划Group***/
+.Group_Empty{display:block; width:25px; height:25px;}
+.Group_Top{ display:block;width:25px; height:25px; background:url(images/background/GroupLine.gif) right top;}
+.Group_Item{ display:block;width:25px; height:25px; background:url(images/background/GroupLine.gif) left bottom;}
+.Group_Bot{ display:block;width:25px; height:25px; background:url(images/background/GroupLine.gif) right bottom;}
+
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error {color: #ff0000;}
+.field-validation-valid {display: none;}
+.input-validation-error {border: 1px solid #ff0000;background-color: #ffeeee;}
+.validation-summary-errors {font-weight: bold;color: #ff0000; line-height:32px;}
+.validation-summary-valid {display: none;}
+
+/***登陆相关***/
+.login_body{  margin:0; height:100%; overflow:hidden;}
+.login_main{ width:1000px; height:500px; margin:0 auto; position:relative;}
+.login_error{position:absolute;  left: 455px;
+    left: 650px;
+    position: absolute;
+    top: 200px;
+    width: 220px;
+    z-index: 8; width:220px; height:50px; border:0px solid #f00;}
+.login_error li{ margin-left:30px; list-style-type:disc;}
+.login_region{position:absolute;  
+	 z-index:2; 
+     
+     position: absolute;
+	 bottom: 100px;
+     left: 270px;
+     width: 360px;   padding-top: 60px;
+     border:0px solid #f00; background:url(images/addimg/loginindextop.gif) 0 0 no-repeat;}
+	 .login_region_bg{width:356px; height:223px;background:url(images/addimg/loginindexbj.gif) 0 0 no-repeat;}
+	 .login_table_wrap{position: absolute;
+    top: 70px; left: 12px;
+     width: 333px;height:203px; background:#fff;}
+.login_region table{ width: 350px; 
+ line-height:35px; margin-top:20px; 
+   overflow: hidden;
+    
+	border-collapse:collapse; border:0;}
+.login_region table th{ width:100px; font-weight:normal; padding-right:5px; text-align:right;}
+.login_region table td input.tbx { width:130px; padding:0 6px; border:1px solid #a6a6a6; background:url(images/background/login_input_bg.jpg); height:20px; line-height:20px; }
+.login_region table td input.tbx.short { width:50px;}
+.login_region table td input.btn_login { width:72px; height:26px; background:url(images/background/login_btn.jpg); border:0;}
+.login_region table td input.tbx:focus { border:1px solid #da3;}
+.login_region table td input.tbx.input-validation-error { border-color:#f00;}
+.login_body .copyright{ position:absolute; z-index:2; bottom:40px; left:290px;}
+  
+/***搜索区域***/
+table.Fixed{ table-layout:fixed;}
+table.Fixed th,table.Fixed td{ white-space:nowrap; overflow:hidden;}
+.search_condition{ line-height:28px; border-bottom:1px dotted #bbb; padding:3px 10px;}
+.search_condition table input.textbox{ width:90%;}
+.search_condition table th{white-space:nowrap; width:65px;}
+.search_button{ padding:5px;}
+
+.DataGirdPanel{ margin-top:2px; border: 0px solid gray; }
+.DataGirdPanel .toolbar{background:#eee url(images/background/Datatables_Toolbar_bg.png) repeat-x; height: 31px; line-height: 25px;border-bottom: 0px solid gray; overflow:hidden;}
+.DataGirdPanel .footbar{background:#eee url(images/background/Datatables_botBar_bg.png) repeat-x; height: 30px; line-height: 30px;border-top: 0px solid gray;overflow:hidden;}
+.DataGirdPanel .toolbar .toolbtn{ float:left;height: 25px;	text-indent:3px;width1:55px;margin: 2px 1px 0 8px;padding: 0px;cursor: pointer;}
+.DataGirdPanel .toolbar .toolbtn a{ display:block;text-indent:16px;padding:1px 4px;}
+.DataGirdPanel .toolbar .toolbtn a:hover{ border:1px solid #ddd; border:1px solid #abc; padding:0px 3px; background-color:#fff;border-radius: 3px;}
+.DataGirdPanel .toolbar .toolbtn a.refresh{background: url(images/background/toolbar_refresh.png) no-repeat 2px center; }
+.DataGirdPanel .toolbar .toolbtn a.add{background: url(images/background/toolbar_add.png) no-repeat 0px center; }
+.DataGirdPanel .toolbar .toolbtn a.barcode{background: url(images/background/toolbar_barcode.png) no-repeat 0px center; }
+.DataGirdPanel .toolbar .toolbtn a.search{background: url(images/background/toolbar_search.png) no-repeat 0px center; }
+.DataGirdPanel .toolbar .toolbtn a.del{background: url(images/background/toolbar_del.png) no-repeat 2px center; }
+.DataGirdPanel .toolbar .toolbtn a.ok{background: url(images/background/toolbar_ok.png) no-repeat 0px center; }
+.DataGirdPanel .toolbar .toolbtn a.change{background: url(images/background/toolbar_change.png) no-repeat 0px center; }
+.DataGirdPanel .toolbar .toolbtn a.undo{background: url(images/background/toolbar_undo.png) no-repeat 0px center; }
+.DataGirdPanel .toolbar .toolbtn a.expand{background: url(images/background/toolbar_modify.png) no-repeat 0px center; }
+.DataGirdPanel .toolbar .toolbtn a.reset{background: url(images/background/toolbar_reset.png) no-repeat 0px center; }
+.DataGirdPanel .toolbar .toolbtn a.modify{background: url(images/background/toolbar_modify.png) no-repeat 0px center; }
+.DataGirdPanel .toolbar .toolbtn a.on{background: url(images/background/toolbar_on.png) no-repeat 0px center; }
+.DataGirdPanel .toolbar .toolbtn a.off{background: url(images/background/toolbar_off.png) no-repeat 0px center; }
+.DataGirdPanel .toolbar .toolbtn a.clock{background: url(images/background/toolbar_clock.png) no-repeat 0px center; }
+.DataGirdPanel .toolbar .toolbtn a.print{background: url(images/background/toolbar_print.png) no-repeat 0px center; }
+.DataGirdPanel .tablelist {border-top:0; border-bottom:0; overflow:auto; *padding-bottom:17px; *overflow-y1:hidden;  min-height:100px; max-height1:304px;}
+:root .DataGirdPanel .tablelist{ height:100%\9;}
+
+.DataGirdPanel .DataTable{ width:100%; border-collapse:collapse; background:#fff; table-layout1:fixed; min-width:850px;}
+.DataGirdPanel .DataTable thead th{height:25px; border:1px solid #808080; padding:0 5px; background:#eee url(images/background/Datatables_Header_bg.png) top repeat-x!important; white-space:nowrap; overflow:hidden;}
+.DataGirdPanel .DataTable tbody td{ height:25px; border:1px solid #808080; padding:0 3px;white-space:nowrap;}
+.DataGirdPanel .DataTable tbody tr.odd{  background-color: rgb(245, 250, 252);}
+.DataGirdPanel .DataTable tbody tr:hover{  background-color: #FFF8D2;}
+.DataGirdPanel .DataTable tbody tr.select{ background-color: rgb(255, 204, 153);}
+.DataGirdPanel .DataTable .CbxColumn{width:24px; max-width:24px; min-width:24px; padding:0; background:url(images/background/Datatables_CbxColumn_bg.png) repeat-y; text-align:center;}
+.DataGirdPanel .DataTable .trEmpty td{ line-height:50px; text-align:center;}
+.DataGirdPanel .DataTable .trNoData td{ line-height:50px; text-align:center;}
+
+/*  
+.pager { font: 12px Arial, Helvetica, sans-serif;padding:8px 20px 10px 0; margin: 0px; text-align:center;}
+.pager a {padding: 1px 6px; border:solid 1px #99BBE8; background: #fff; text-decoration: none;margin-right:2px; color:#346295;}
+.pager a:visited1 {padding: 1px 6px;  background: #fff; text-decoration: none;}
+.pager .cpb {padding: 1px 6px;font-weight: bold; background:#ffa501; color:Black!important;}
+.pager a:hover {color: #fff; background: #99B3FF;text-decoration: none;}
+.pageinfo{ padding:0 15px;}
+*/
+
+.pager{padding: 3px 10px 0;height: 30px;}
+.pager a{color: #000000;padding: 0px 3px;background-color1: #FFFFFF; margin:0 5px;}
+.pager a:hover{color: #FFFFFF;background-color: #3352CC;font-weight1: bolder;}
+.pager .record{color: #D54D2B;margin-left: 5px;margin-right: 3px;}
+.pager .cpb{border: solid 1px #D54D2B;padding: 0px 3px 0px 3px;background-color: #D54D2B;color: #FFFFFF;}
+.pageinfo{ padding:0 15px;}
+
+
+
+/*  内页录入表单的样式 */
+.tb_insert{border-collapse:collapse;border:0 none; width:100%;}
+.tb_insert tbody th,.tb_insert tbody td
+{height:30px;line-height:30px;border-bottom:dotted 1px #c8c8c8;font-size:12px;}
+.tb_insert tbody th{text-align:left;color:#787878;background:#f5f5f5; padding:0 10px;width:80px;}
+.tb_insert tbody td{text-align:left;color:#787878;background:#fff;border-right:0 none;padding:0 10px; }
+.tb_insert tfoot td{text-align:center;border:0 none;}
+
+#Loading{ position:absolute;background:#fff; z-index:99999; text-align:center; display:none; color:Blue; position:fixed; top:0; left:0;}
+
+.icon_plus{ width:10px; height:10px; background:url(images/background/icon.png) -8px -8px; display:inline-block;}
+.icon_sub{ width:10px; height:10px; background:url(images/background/icon.png) -32px -8px; display:inline-block;}
+
+
+
+.ScanInput
+{
+    height: 30px;
+    line-height: 30px;
+    font-size: 30px!important;
+    font-weight: bold;
+}
+.ScanInput:focus
+{
+    color: Red;
+}
+select.ScanInput
+{
+    font-size: 24px!important;
+}

@@ -1,0 +1,117 @@
+﻿@{
+    Layout = "_Layout_LigerUI.cshtml";
+}
+
+<input type="hidden" id="MenuNo" value="OrderManageOrders" />
+<div id="mainsearch" style=" width:98%">
+    <div class="searchtitle">
+        <span>搜索</span><img src="../lib/icons/32X32/searchtool.gif" />
+        <div class="togglebtn"></div>
+    </div>
+    <div class="navline" style="margin-bottom:4px; margin-top:4px;"></div>
+    <div class="searchbox">
+        <form id="formsearch" class="l-form"></form>
+    </div>
+</div>
+<div id="maingrid"></div>
+@section FooterScripts
+{
+    <script type="text/javascript">
+        $(function () {
+            //列表结构
+            var grid = $("#maingrid").ligerGrid({
+                columns: [
+                { display: "合同编号", name: "ShipName", width: 180, type: "text", align: "left" },
+                { display: "合同名称", name: "ShipAddress", width: 180, type: "text", align: "left" },
+                { display: "配送商编号", name: "ShipCity", width: 180, type: "text", align: "left" },
+                { display: "配送商名称", name: "OrderDate", width: 180, type: "text", align: "left" },
+                { display: "联系人", name: "RequiredDate", width: 180, type: "text", align: "left" },
+                { display: "创建时间", name: "ShippedDate", width: 180, type: "text", align: "center" },
+                { display: "开始时间", name: "ShipRegion", width: 180, type: "text", align: "center" },
+                { display: "结束时间", name: "ShipPostalCode", width: 180, type: "text", align: "center" },
+                ], toolbar: {},
+
+                pageSize: 20, url: '@Url.Action("GetDataList")', sortName: 'ID',
+
+                width: '98%', height: '100%', heightDiff: -10, checkbox: false
+            });
+
+            //双击事件
+            LG.setGridDoubleClick(grid, 'modify');
+
+            //搜索表单应用ligerui样式
+            $("#formsearch").ligerForm({
+                fields: [
+                 {
+                     display: "客户 ", name: "CustomerID", newline: true, labelWidth: 100, width: 220, space: 30, type: "select",
+                     comboboxName: "CustomersCustomerID", attr: { op: "equal" }, cssClass: "field",
+                     options: { valueFieldID: "CustomerID", url: "../handler/select.ashx?view=Customers&idfield=CustomerID&textfield=CustomerID" }
+                 },
+                 { display: "订购日期大于", name: "OrderDate", newline: false, labelWidth: 100, width: 220, space: 30, type: "date", cssClass: "field", attr: { "op": "greater" } },
+                 {
+                     display: "城市", name: "ShipCity", newline: true, labelWidth: 100, width: 220, space: 30, type: "select", cssClass: "field", options: {
+                         url: "../handler/select.ashx?view=Orders&idfield=ShipCity&textfield=ShipCity&distinct=true"
+                     }
+                 }
+                ],
+                appendID: false,
+                toJSON: JSON2.stringify
+            });
+
+            //增加搜索按钮,并创建事件
+            LG.appendSearchButtons("#formsearch", grid);
+
+            //加载toolbar
+            LG.loadToolbar(grid, toolbarBtnItemClick);
+        });
+    
+        //工具条事件
+        function toolbarBtnItemClick(item) {
+            switch (item.id) {
+                case "add":
+                    top.f_addTab(null, '增加订单信息', 'OrderManage/OrdersDetail.aspx');
+                    break;
+                case "view":
+                    var selected = grid.getSelected();
+                    if (!selected) { LG.tip('请选择行!'); return }
+                    top.f_addTab(null, '查看订单信息', 'OrderManage/OrdersDetail.aspx?IsView=1&ID=' + selected.OrderID);
+                    break;
+                case "modify":
+                    var selected = grid.getSelected();
+                    if (!selected) { LG.tip('请选择行!'); return }
+                    top.f_addTab(null, '修改订单信息', 'OrderManage/OrdersDetail.aspx?ID=' + selected.OrderID);
+                    break;
+                case "delete":
+                    jQuery.ligerDialog.confirm('确定删除吗?', function (confirm) {
+                        if (confirm)
+                            f_delete();
+                    });
+                    break;
+            }
+        }
+        function f_reload() {
+            grid.loadData();
+        }
+        function f_delete() {
+            var selected = grid.getSelected();
+            if (selected) {
+                LG.ajax({
+                    type: 'AjaxOrderManage',
+                    method: 'RemoveOrders',
+                    loading: '正在删除中...',
+                    data: { ID: selected.OrderID },
+                    success: function () {
+                        LG.showSuccess('删除成功');
+                        f_reload();
+                    },
+                    error: function (message) {
+                        LG.showError(message);
+                    }
+                });
+            }
+            else {
+                LG.tip('请选择行!');
+            }
+        }
+</script>
+}

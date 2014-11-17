@@ -1,0 +1,59 @@
+﻿@model Shangpin.Logistic.Util.Pager.PagedList<Shangpin.Logistic.Model.TestModel>
+@{
+    ViewBag.Title = "TestList";
+    ViewBag.HideSearch = false;
+    Layout = "~/Views/Shared/_Layout_SearchList.cshtml";
+}
+
+@section head{
+<script type="text/javascript">
+    @*function RepairBatchDetail() {
+        var arr = TMS.Page.CheckDataTableChecked(false);
+        if (arr) {
+            var keys="";
+            arr.each(function(){
+                keys += $(this).val()+";";
+            });
+            var parms = {ids:keys.substr(0,keys.length-1)};
+            $.ajax({
+                url:"@Url.Action("RepairBatchDetail")",
+                data:parms,
+                dataType:"json",
+                success:function(data){
+                    if(data.IsSuccess){
+                        ymPrompt.succeedInfo({title:'提示',message:data.Message});
+                        $("#btnBatchRefresh").click();
+                    }else{
+                        ymPrompt.succeedInfo({title:'提示',message:data.Message});
+                    }
+                },
+                error:function(){
+                    ymPrompt.errorInfo({ title: '提示', message: "操作失败!" });
+                }
+            });
+        }
+    }*@
+</script>
+}
+
+
+@section search{
+    <div class="search_condition" id="divSearchCondition">
+        @using (Ajax.BeginForm((AjaxOptions)ViewBag.AjaxOptions))
+        {
+            <table class="tb_insert Fixed">
+                <tr>
+                    <th>规则名称</th>
+                    <td><input id="txtRoleName" class="textbox" type="text" name="RoleName" style="width:200px;" /></td>
+                    <td><input type="submit" value="查询" class="button" id="btnSearch" name="BtnSearch" /></td>
+                </tr>
+            </table>
+        }
+    </div>
+}
+
+@section list{
+    <div id="SearchResultList" class="DataGirdPanel">
+        @{Html.RenderPartial("_PartialTestList", Model);}
+    </div>
+}

@@ -1,0 +1,35 @@
+﻿
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <script src="@Url.Content("~/Scripts/base.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/import/container.js")" type="text/javascript"></script>
+    <style type="text/css">
+        html, body {
+            height: 100%;
+            padding: 0px;
+            margin: 0;
+        }
+
+        body {
+            overflow-y: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div id="container" style="margin: 7px 0px">
+        <div id="tab_menu">
+        </div>
+        <div id="page">
+        </div>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    init();
+    window.onload = window.onresize = function () {
+        var pageCon = document.getElementById("page");
+        var bodyHeight = document.body.clientHeight;
+        pageCon.style.height = (bodyHeight - 43) + "px";
+    }
+</script>

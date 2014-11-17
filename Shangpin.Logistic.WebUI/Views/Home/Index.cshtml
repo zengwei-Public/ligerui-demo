@@ -1,0 +1,257 @@
+﻿
+    @{
+        ViewBag.Title = "尚品TMS系统";
+        Layout = "~/Views/Shared/_Layout_LigerUI.cshtml";
+    }
+
+    <div id="topmenu" class="l-topmenu">
+        <div class="l-topmenu_wra">
+            <div class="l-topmenu-logo"></div>
+
+        </div>
+        <div class="l-topmenu-welcome">
+            <span class="l-topmenu-username">@((ViewData["CurrentUser"] as Shangpin.Logistic.Model.Basic.UserModel).UserName)</span> 欢迎您  &nbsp;
+            @*[<a href="javascript:f_changepassword()">修改密码</a>] &nbsp;
+                [<a href="javascript:f_login()">切换用户</a>]*@
+            [<a href="javascript:f_logout()">退出</a>]
+        </div>
+        <div class="l-topmenu-welcome_select">
+            <select>
+                <option>TMS</option>
+                <option>SCM</option>
+                <option>CMS</option>
+                <option>CSS</option>
+            </select>
+        </div>
+        <div id="topMenuList" class="topMenuDiv">
+            @*顶部菜单*@
+        </div>
+
+    </div>
+    <div class="l-topmenu_bot"></div>
+
+    <div id="mainbody" class="l-mainbody">
+
+        <div position="left" title=" " id="mainmenu" class="">
+            @*子菜单*@
+            <div class="l-accordion-header">
+                <div id="MenuTitle" class="l-accordion-header-inner" style="text-align:center;"></div>
+            </div>
+            <div id="menuLeftDiv" title="" class="l-accordion-content" style="height: 315px; display: block;margin-left:2px; margin-right:2px;">
+
+            </div>
+        </div>
+
+        <div position="center" id="framecenter">
+
+            <div id="homePage" tabid="home" title="我的主页"></div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        //几个布局的对象
+        var layout, tab, accordion;
+        //tabid计数器，保证tabid不会重复
+        var tabidcounter = 0;
+        //窗口改变时的处理函数
+        function f_heightChanged(options) {
+            if (tab)
+                tab.addHeight(options.diff);
+            if (accordion && options.middleHeight - 24 > 0)
+                accordion.setHeight(options.middleHeight - 24);
+        }
+        //增加tab项的函数
+        function f_addTab(tabid, text, url) {
+            if (!tab) return;
+            if (!tabid) {
+                tabidcounter++;
+                tabid = "tabid" + tabidcounter;
+            }
+            tab.addTabItem({ tabid: tabid, text: text, url: url });
+        }
+
+        //登录
+        function f_login() {
+            LG.login();
+        }
+        //退出
+        function f_logout() {
+            var url = '@Url.Action("Logout")';
+            ymPrompt.confirmInfo('你确认要退出系统？', null, null, "询问",
+            function (tp, data) {
+                if (tp == "ok") {
+                    window.location = url;
+                }
+            });
+        }
+
+        //修改密码
+        function f_changepassword() {
+            LG.changepassword();
+        }
+        $(document).ready(function () {
+
+            //布局初始化
+            //layout
+            layout = $("#mainbody").ligerLayout({ height: '100%', heightDiff: -3, leftWidth: 200, onHeightChanged: f_heightChanged, minLeftWidth: 120 });
+            var bodyHeight = $(".l-layout-center:first").height();
+            //Tab
+            tab = $("#framecenter").ligerTab({ height: bodyHeight, contextmenu: true });
+
+
+            //预加载dialog的背景图片
+            LG.prevDialogImage();
+
+            var mainmenu = $("#mainmenu");
+            var topmenu = $("#topMenuList");
+            var homePage = $("#homePage");
+
+            $("#pageloading").hide();
+
+            $.getJSON('@Url.Content("~/Home/MenuGroups?rnd=")' + Math.random(), function (menus) {
+                var item = new Array();
+                item[item.length] = '<ul class="topMenuUL">';
+                var parentId = 0;
+                $(menus).each(function (i, menu) {
+                    if (i == 0) parentId = menu.ID;
+                    item[item.length] = '<li parentid="' + menu.ID + '">' + menu.Name + '</li>';
+                });
+
+                LoadMenus(parentId);
+                item[item.length] = '</ul>';
+                topmenu.append(item.join(''));
+                LoadTopMenuEvent();
+                $("ul.topMenuUL li")[0].click();
+            });
+            LoadNotice();
+        });
+
+        function LoadMenus(parentId) {
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("MenuItems")?parentId=' + parentId,
+                success: function (data) {
+                    //console.log("success" + data);
+                    //alert(data)
+                    $("#menuLeftDiv").html('');
+                    $("#menuLeftDiv").html(data);
+                    LoadItemMenuEvent();
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    //alert(textStatus);
+                    //alert(XMLHttpRequest);
+                    //alert(errorThrown);
+                    console.log('err1' + XMLHttpRequest);
+                    console.log('err2' + textStatus);
+                    console.log('err3' + errorThrown);
+                }
+            });
+        }
+
+        function LoadTopMenuEvent() {
+            //top菜单初始化
+            $("ul.topMenuUL li").live('click', function () {
+                var jitem = $(this);
+                var parentid = jitem.attr("parentid");
+                if (!parentid) return;
+                $("#MenuTitle").text(jitem.text());
+                CheckedTopMenusCSS(parentid);
+                LoadMenus(parentid);
+            }).live('mouseover', function () {
+                var jitem = $(this);
+                jitem.addClass("over");
+            }).live('mouseout', function () {
+                var jitem = $(this);
+                jitem.removeClass("over");
+            });
+        }
+
+        function LoadItemMenuEvent() {
+            //菜单初始化
+            $("ul.menulist li span").live('click', function () {
+                var jitem = $(this);
+                var tabid = jitem.attr("tabid");
+                var url = jitem.attr("url");
+
+                if (!tabid && url.length > 0) {
+                    //tabidcounter++;
+                    tabid = "tabid" + jitem.attr("menuno");
+                    jitem.attr("tabid", tabid);
+
+                    //给url附加menuno
+                    if (url.indexOf('?') > -1) url += "&";
+                    else url += "?";
+                    url += "MenuNo=" + jitem.attr("menuno");
+                    jitem.attr("url", url);
+                }
+                if (url.length > 0)
+                    f_addTab(tabid, jitem.text(), url);
+                CheckedLeftMenusCSS(tabid);
+            }).live('mouseover', function () {
+                var jitem = $(this);
+                jitem.addClass("over");
+            }).live('mouseout', function () {
+                var jitem = $(this);
+                jitem.removeClass("over");
+            });
+        }
+
+        function CheckedTopMenusCSS(checkId) {
+            $("ul.topMenuUL li").each(function (i, menu) {
+                var jitem = $(this);
+                var parentid = jitem.attr("parentid");
+                if (parentid == checkId) jitem.addClass("checkedTop")
+                else jitem.removeClass("checkedTop");
+            });
+        }
+
+        function CheckedLeftMenusCSS(checkId) {
+            $("ul.menulist li span").each(function (i, menu) {
+                var jitem = $(this);
+                var tabid = jitem.attr("tabid");
+                if (tabid == checkId) {
+                    jitem.addClass("checkedLeft");
+                    var img = jitem.find("#menuImg_" + jitem.attr("menuno"))[0];
+                    if (!img) return;
+                    var src = img.src;
+                    if (src.indexOf("closeico.gif") >= 0) {
+                        img.src = src.replace("closeico", "openico");
+                    } else
+                        img.src = src.replace("openico", "closeico");
+                    var children = $("#children" + jitem.attr("menuno"));
+                    if (!children) return;
+                    if (children.hasClass("open")) {
+                        children.removeClass("open");
+                        children.addClass("close");
+                    }
+                    else {
+                        children.removeClass("close");
+                        children.addClass("open");
+                    }
+                }
+                else {
+                    jitem.removeClass("checkedLeft");
+                }
+            });
+        }
+
+        function LoadNotice() {
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("Notice")',
+                success: function (data) {
+                    console.log("success" + data);
+                    //alert(data)
+                    $("#homePage").html('');
+                    $("#homePage").html(data);
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    //alert(textStatus);
+                    //alert(XMLHttpRequest);
+                    //alert(errorThrown);
+                    console.log('err1' + XMLHttpRequest);
+                    console.log('err2' + textStatus);
+                    console.log('err3' + errorThrown);
+                }
+            });
+        }
+    </script>

@@ -1,0 +1,43 @@
+List=function(){};List.prototype=new Array();List.prototype.constructor=List;List.prototype.count=0;List.prototype.caller=null;List.prototype.add=function(item){if(this.onbeforeadd!=null)this.onbeforeadd.call(this,item);this.count++;this[this.count-1]=item;if(this.onafteradd!=null)this.onafteradd.call(this);}
+List.prototype.insert=function(index,item){if(index==null)index=0;if(this.onbeforinsert!=null)this.onbeforeinsert.call(this,index,item);if(index<this.count){this.count++;for(var i=this.count-1;i>=index;i--){this[i]=this[i-1];}
+this[index]=item;}else{this.add(item);}
+if(this.onafterinsert!=null)this.onafterinsert.call(this,index);}
+List.prototype.remove=function(item){for(var i=0;i<this.count;i++){if(this[i]==item){break;}}
+if(i<this.count){if(this.onbeforeremove!=null)this.onbeforeremove.call(this,i);for(var j=i;j<this.count-1;j++){this[j]=this[j+1];}
+this[this.count-1]=null;this.count--;if(this.onafterremove!=null)this.onafterremove.call(this);}}
+List.prototype.removeAt=function(index){if(index==null||index>this.count-1)index=this.count;if(index<0)index=0;if(index<this.count){if(this.onbeforeremove!=null)this.onbeforeremove.call(this,index);for(var i=index;i<this.count-1;i++){this[i]=this[i+1];}
+this[this.count-1]=null;this.count--;if(this.onafterremove!=null)this.onafterremove.call(this);}}
+List.prototype.clear=function(){if(this.onbeforeclear!=null)this.onbeforeclear.call(this);for(var i=0;i<this.count;i++){this[i]=null;}
+this.count=0;if(this.onafterclear!=null)this.onafterclear.call(this);}
+List.prototype.indexOf=function(item){var index=-1;for(var i=0;i<this.count;i++){if(this[i]==item){index=i;break;}}
+return index;}
+List.prototype.lastIndexOf=function(item){var index=-1;for(var i=this.count-1;i>=0;i--){if(this[i]==item){index=i;break;}}
+return index;}
+List.prototype.contains=function(item){var isContains=false;for(var i=0;i<this.count;i++){if(item==this[i]){isContains=true;break;}}
+return isContains;}
+List.prototype.reverse=function(){var item;var half=Math.floor(this.count/2);for(var i=0;i<half;i++){item=this[i];this[i]=this[this.count-i-1];this[this.count-i-1]=item;}}
+List.prototype.onbeforeadd=null;List.prototype.onafteradd=null;List.prototype.onbeforeinsert=null;List.prototype.onafterinsert=null;List.prototype.onbeforeremove=null;List.prototype.onafterremove=null;List.prototype.onbeforeclear=null;List.prototype.onafterclear=null;
+document.tabViews=new Array();TabView=function(id,changeOn,fade,defaultClass,overClass,selectClass,onChange){this.id=id;this.changeOn=changeOn||'click';this.changeOn=this.changeOn.toLowerCase();if(fade==null)fade=false;if(typeof(fade)=='string'){if(/^true$/i.test(fade)||/^false$/i.test(fade)){fade=fade.toLowerCase();}
+fade=eval(fade);}
+if(fade!=true&&fade!=false)fade=false;this.fade=fade;this.defaultClass=defaultClass||'';this.overClass=overClass||defaultClass;this.selectClass=selectClass||overClass;this.selectedIndex=-1;this.selectedItem=null;this.onchange=onChange;this.items=new List();var tabView=this;this.items.onafteradd=function(){var index=this.count-1;if(this[index].selected||index==0){tabView.select(index);}else{this[index].button.className=this[index].defaultClass||tabView.defaultClass;this[index].block.style.display='none';}
+this[index].button.onmouseover=function(ev){tabView.__MouseOver(index,ev);}
+this[index].button.onmouseout=function(ev){tabView.__MouseOut(index);}
+this[index].button.onclick=function(ev){tabView.__Click(index,ev);}}
+this.items.onbeforeremove=function(index){this[index].button.onmouseover=null;this[index].button.onmouseout=null;this[index].button.onclick=null;tabView.select(0);};this.items.onbeforeclear=function(){for(var i=0;i<this.count;i++){this[i].button.onmouseover=null;this[i].button.onmouseout=null;this[i].button.onclick=null;}};document.tabViews[tabView.id]=this;};TabView.prototype.__MouseOver=function(index,ev){if(this.selectedIndex!=index){if(this.changeOn=='mouseover'){this.change(index,ev);}else if(this.changeOn=='click'){this.items[index].button.className=this.items[index].overClass||this.overClass;}}}
+TabView.prototype.__MouseOut=function(index){if(this.changeOn=='click'&&this.selectedIndex!=index){this.items[index].button.className=this.items[index].defaultClass||this.defaultClass;}}
+TabView.prototype.__Click=function(index,ev){if(this.changeOn=='click'){this.change(index,ev);}}
+TabView.prototype.select=function(index){if(index<0)index=0;if(index>this.items.count-1)index=this.items.count-1;if(this.selectedIndex!=index){if(this.selectedIndex!=-1){this.selectedItem.button.className=this.selectedItem.defaultClass||this.defaultClass;this.selectedItem.block.style.display='none';this.selectedItem.selected=false;}
+this.items[index].button.className=this.items[index].selectClass||this.selectClass;if(this.fade)TabView.__FadeBlock(this.items[index].block.id,0);this.items[index].block.style.display='';this.selectedIndex=index;this.items[index].selected=true;this.selectedItem=this.items[index];}}
+TabView.prototype.change=function(index,ev){if(index<0)index=0;if(index>this.items.count-1)index=this.items.count-1;if(this.selectedIndex!=index){var selectedIndex=this.selectedIndex;if(selectedIndex!=-1)this.selectedItem.selected=false;this.selectedIndex=index;this.items[index].selected=true;this.selectedItem=this.items[index];var returnValue=true;if(this.onchange!=null){if(typeof(this.onchange)=='function'){returnValue=this.onchange.call(this,ev);}else if(typeof(this.onchange)=='string'){eval('returnValue=function(ev){'+this.onchange+'}');returnValue=returnValue.call(this,ev);}
+if(returnValue!=false&&returnValue!=true)returnValue=true;}
+if(returnValue){if(selectedIndex!=-1){this.items[selectedIndex].button.className=this.selectedItem.defaultClass||this.defaultClass;this.items[selectedIndex].block.style.display='none';}
+this.items[index].button.className=this.items[index].selectClass||this.selectClass;if(this.fade)TabView.__FadeBlock(this.items[index].block.id,0);this.items[index].block.style.display='';}else{this.items[index].selected=false;this.selectedIndex=selectedIndex;if(selectedIndex!=-1){this.items[selectedIndex].selected=true;this.selectedItem=this.items[selectedIndex];}else{this.selectedItem=null;}}}}
+TabView.__FadeBlock=function(blockId,alpha){if(alpha<10){alpha++;if(navigator.appName=='Microsoft Internet Explorer'){document.getElementById(blockId).style.filter='alpha(opacity='+(alpha*10)+')';}else{document.getElementById(blockId).style.opacity=alpha/10;}
+window.setTimeout('TabView.__FadeBlock("'+blockId+'",'+alpha+');',60);}}
+TabItem=function(button,block,selected,defaultClass,overClass,selectClass){this.button=button||'';if(typeof(this.button)=='string')this.button=document.getElementById(this.button);this.block=block||'';if(typeof(this.block)=='string')this.block=document.getElementById(this.block);this.defaultClass=defaultClass;this.overClass=overClass;this.selectClass=selectClass;if(selected==null)selected=false;if(typeof(selected)=='string'){if(/^true$/i.test(selected)||/^false$/i.test(selected)){selected=selected.toLowerCase();}
+selected=eval(selected);}
+if(selected!=true&&selected!=false)selected=true;this.selected=selected;};function __InitializeTabViews(){var tabViews,tabView,tabItem;tabViews=document.getElementsByTagName('tabview');var parentNode;var code,type;for(var i=0;i<tabViews.length;i++){parentNode=tabViews[i].parentNode;var code=parentNode.innerHTML;while(/<\/?tabview/i.test(code)){code=code.replace(/<tabview/i,'<label type="tabview"');code=code.replace(/<\/tabview>/i,'</label>');}
+while(/tabitem/i.test(code)){code=code.replace(/<tabitem/i,'<span');code=code.replace(/<\/tabitem>/i,'</span>');}
+parentNode.innerHTML=code;}
+tabViews=document.getElementsByTagName('label');for(var i=0;i<tabViews.length;i++){type=tabViews[i].getAttribute('type');if(type!=null&&type.toLowerCase()=='tabview'){tabView=new TabView(tabViews[i].id,tabViews[i].getAttribute('changeOn'),tabViews[i].getAttribute('fade'),tabViews[i].getAttribute('defaultClass'),tabViews[i].getAttribute('overClass'),tabViews[i].getAttribute('selectClass'),tabViews[i].getAttribute('onchange'));for(var j=0;j<tabViews[i].childNodes.length;j++){if(tabViews[i].childNodes[j].nodeName=='SPAN'){tabItem=tabViews[i].childNodes[j];tabView.items.add(new TabItem(tabItem.getAttribute('button'),tabItem.getAttribute('block'),tabItem.getAttribute('selected'),tabItem.getAttribute('defaultClass'),tabItem.getAttribute('overClass'),tabItem.getAttribute('selectClass')));}}}}}
+__InitializeTabViews();

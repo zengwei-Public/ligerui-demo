@@ -1,0 +1,26 @@
+﻿@model Shangpin.Logistic.Model.Basic.NoticeModel
+
+<div class="currentPosition" style="margin-top:5px; width:100%;"><h2 class="maintit"><span class="maintitbj">您所在的位置：我的主页</span><span class="r"><a href="" title="" target="_blank">[帮助]</a></span></h2></div>
+<div style="padding:10px; overflow:auto; text-align:center;background:#FFFFFF;">
+    
+    
+
+    <table style="width: 98%; margin: 10 20 20 6px; text-align:left; line-height:35px;" border="0">
+        <tr>
+            <td colspan="2">
+                
+            </td>
+        </tr>
+        <tr>
+            <td align="left"></td>
+            <td align="right" style="padding-right: 10px"></td>
+        </tr>
+        <tr>
+            <td colspan="2" class="notice">
+                <b> @(new MvcHtmlString(Model.Title))</b>
+                <br />
+                @(new MvcHtmlString(Model.NoitceContent))
+            </td>
+        </tr>
+    </table>
+</div>

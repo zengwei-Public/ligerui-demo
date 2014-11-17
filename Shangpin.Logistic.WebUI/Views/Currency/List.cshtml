@@ -1,0 +1,110 @@
+﻿@{
+    ViewBag.Title = "货币管理";
+    Layout = "~/Views/Shared/_Layout_LigerUI.cshtml";
+}
+<input type="hidden" id="MenuNo" value="CurrencyManage" />
+<div id="mainsearch" style=" width:98%">
+    <div class="searchtitle">
+        <span>搜索</span><img src="../lib/icons/32X32/searchtool.gif" />
+        <div class="togglebtn"></div>
+    </div>
+    <div class="navline" style="margin-bottom:4px; margin-top:4px;"></div>
+    <div class="searchbox">
+        <form id="formsearch" class="l-form"></form>
+    </div>
+</div>
+<div id="maingrid"></div>
+<div id="detail" style="display:none;"><form id="mainform" method="post"></form></div>
+@section FooterScripts
+{
+    <script type="text/javascript">
+
+        $("#pageloading").hide();
+
+        var rootPath = "../";
+
+        //列表结构
+        var grid = $("#maingrid").ligerGrid({
+            columns: [
+            { display: "货币编号", name: "ShipName", width: 180, type: "text", align: "left" },
+            { display: "货币名称", name: "ShipAddress", width: 180, type: "text", align: "left" },
+            { display: "货币符号", name: "ShipCity", width: 180, type: "text", align: "left" },
+            { display: "货币代码", name: "OrderDate", width: 180, type: "text", align: "left" },
+            { display: "汇率", name: "RequiredDate", width: 180, type: "text", align: "left" },
+            { display: "默认货币", name: "ShippedDate", width: 180, type: "text", align: "left" },
+            { display: "创建时间", name: "ShipRegion", width: 180, type: "text", align: "center" }
+            ], toolbar: {},
+            pageSize: 20, url: '@Url.Action("GetDataList")', sortName: 'CreateTime',
+            width: '98%', height: '100%', heightDiff: -10, checkbox: false
+        });
+
+        //双击事件
+        LG.setGridDoubleClick(grid, 'modify');
+
+        //搜索表单应用ligerui样式
+        $("#formsearch").ligerForm({
+            fields: [
+             { display: "创建日期", name: "BeginTime", newline: true, labelWidth: 100, width: 220, space: 30, type: "date", cssClass: "field", attr: { "op": "greater" } },
+             { display: "至", name: "EndTime", newline: false, labelWidth: 100, width: 220, space: 30, type: "date", cssClass: "field", attr: { "op": "greater" } },
+             { display: "关键字", name: "keyword", newline: true, labelWidth: 100, width: 400, space: 30, type: "text", cssClass: "field" }
+            ],
+            appendID: false,
+            toJSON: JSON.stringify
+        });
+
+        //增加搜索按钮,并创建事件
+        LG.appendSearchButtons("#formsearch", grid);
+
+        //加载toolbar
+        LG.loadToolbar(grid, toolbarBtnItemClick);
+
+        //工具条事件
+        function toolbarBtnItemClick(item) {
+            switch (item.id) {
+                case "add":
+                    top.f_addTab(null, '增加货币信息', 'OrderManage/OrdersDetail.aspx');
+                    break;
+                case "view":
+                    var selected = grid.getSelected();
+                    if (!selected) { LG.tip('请选择行!'); return }
+                    top.f_addTab(null, '查看货币信息', 'OrderManage/OrdersDetail.aspx?IsView=1&ID=' + selected.OrderID);
+                    break;
+                case "modify":
+                    var selected = grid.getSelected();
+                    if (!selected) { LG.tip('请选择行!'); return }
+                    top.f_addTab(null, '修改货币信息', 'OrderManage/OrdersDetail.aspx?ID=' + selected.OrderID);
+                    break;
+                case "delete":
+                    jQuery.ligerDialog.confirm('确定删除吗?', function (confirm) {
+                        if (confirm)
+                            f_delete();
+                    });
+                    break;
+            }
+        }
+        function f_reload() {
+            grid.loadData();
+        }
+        function f_delete() {
+            var selected = grid.getSelected();
+            if (selected) {
+                LG.ajax({
+                    type: 'AjaxOrderManage',
+                    method: 'RemoveOrders',
+                    loading: '正在删除中...',
+                    data: { ID: selected.OrderID },
+                    success: function () {
+                        LG.showSuccess('删除成功');
+                        f_reload();
+                    },
+                    error: function (message) {
+                        LG.showError(message);
+                    }
+                });
+            }
+            else {
+                LG.tip('请选择行!');
+            }
+        }
+    </script>
+}

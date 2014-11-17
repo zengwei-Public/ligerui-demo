@@ -1,0 +1,52 @@
+﻿@using Shangpin.Logistic.Web.WebControls.Mvc
+@model Shangpin.Logistic.Util.Pager.IPagedList
+<div class="footbar">
+    @if (Model != null && Model.Count > 0)
+    {
+        AjaxOptions ajaxoptions = ViewBag.AjaxOptions ??
+            new AjaxOptions
+            {
+                UpdateTargetId = ViewBag.UpdateTargetId ?? "UpdateTargetId",
+                OnBegin = ViewBag.OnBegin ?? "",
+                HttpMethod = "Post",
+                LoadingElementId = ViewBag.LoadingElementId ?? "Loading",
+                OnFailure = ViewBag.OnFailure ?? "AjaxError",
+            };
+
+        @Html.AjaxPager(Model,
+            new PagerOptions()
+            {
+                PageIndexParameterName = ViewBag.PageIndexParameterName ?? "page",
+                ShowDisabledPagerItems = true,
+                AlwaysShowFirstLastPageNumber = true,
+                AutoHide = false,
+                CssClass = "pager fright",
+                SeparatorHtml = "",
+                CurrentPagerItemWrapperFormatString = "<a class='cpb'>{0}</a>",
+            }, ajaxoptions)
+
+
+        <div class="pageinfo">
+            @{
+        var ShowPageSize = ViewBag.ShowPageSize ?? true;
+        if (ShowPageSize)
+        {
+            @Html.DropDownList("PageSize", new List<SelectListItem>
+                        {
+                            //new SelectListItem{ Text="1",Value="1",Selected = Model.PageSize==1},
+                            //new SelectListItem{ Text="2",Value="2",Selected = Model.PageSize==2},
+                            new SelectListItem{ Text="5",Value="5",Selected = Model.PageSize==5},
+                            new SelectListItem{ Text="10",Value="10",Selected = Model.PageSize==10},
+                            new SelectListItem{ Text="15",Value="15",Selected = Model.PageSize==15},
+                            new SelectListItem{ Text="20",Value="20",Selected = Model.PageSize==20},
+                            new SelectListItem{ Text="50",Value="50",Selected = Model.PageSize==50},
+                            new SelectListItem{ Text="100",Value="100",Selected = Model.PageSize==100},
+                        }, new { onchange = "OnChangePageSize($(this).val(),'" + Request.Url.PathAndQuery + "'," + Shangpin.Logistic.Model.Basic.Consts.COOKIE_EXPIRES + ")" })
+        }
+            }
+            显示第 @Model.StartRecordIndex - @Model.EndRecordIndex 条数据，总共 @Model.TotalItemCount
+            条数据
+        </div>
+        <input type="hidden" id="TotalItemCount" name="TotalItemCount" value="@Model.TotalItemCount" />
+    }
+</div>

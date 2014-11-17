@@ -1,0 +1,38 @@
+﻿@model Shangpin.Logistic.Model.Basic.NoticeModel
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link href="@Url.Content("~/content/StylesNew/main.css")" rel="stylesheet" type="text/css" />
+    <title></title>
+    <style type="text/css">
+        .notice {
+            line-height: 35px;
+        }
+    </style>
+</head>
+<body>
+    <form name="form1" method="post" action="" id="form1">
+        <div>
+            <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUJODMyODUzNzk0ZGQ=" />
+        </div>
+        <table style="width: 96%; margin: 20px">
+            <tr>
+                <td class="left_txt" colspan="2">
+                    当前位置： 桌面<hr />
+                </td>
+            </tr>
+            <tr>
+                <td align="left"></td>
+                <td align="right" style="padding-right: 10px"></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="notice">
+                    <b> @(new MvcHtmlString(Model.Title))</b>
+                    <br />
+                    @(new MvcHtmlString(Model.NoitceContent))
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

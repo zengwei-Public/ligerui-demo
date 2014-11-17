@@ -1,0 +1,21 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>转到登陆页面</title>
+    <script type="text/javascript">
+        ( function () {
+            setTimeout(function(){
+            top.location="@Url.Action("Login")";
+            },300);
+        })();
+    </script>
+</head>
+<body>
+    <div style="line-height: 100px; text-align: center;">
+        转到登陆页面......
+    </div>
+</body>
+</html>

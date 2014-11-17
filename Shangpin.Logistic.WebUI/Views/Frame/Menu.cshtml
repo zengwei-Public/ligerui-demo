@@ -1,0 +1,40 @@
+﻿@model  List<Shangpin.Logistic.Model.Basic.MenuModel>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link href="@Url.Content("~/content/StylesNew/frame.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/base.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/import/container.js")" type="text/javascript"></script>
+</head>
+<body>
+    <div style="width: 100%; height: 100%; overflow-x: hidden;">
+        <treeview id="TreeView1" theme="vista" style="padding: 5px 0px 5px 5px;" width="100%"
+                  height="100%" backcolor="#FFFFFF" borderwidth="0px" borderstyle="solid" bordercolor="#000000"
+                  nodeindent="16" nodespacing="0" nodepadding="2" childnodespadding="0" showimages="true"
+                  showcheckboxes="false" showdebugnode="false" expandonselect="true" selectedpath=""
+                  checkedpaths="" expanddepth="1" xml="">
+
+
+            @if (Model != null)
+            {
+                foreach (var menuGroup in Model.Where(x => x.MenuLevel == 1).GroupBy(x => x.ParentID).OrderBy(x => x.Key))
+                {
+                    var titleMenu = Model.FirstOrDefault(x => x.ID == menuGroup.Key);
+                    if (titleMenu != null)
+                    {
+                        <treenode id='ParentNode@(titleMenu.ID)' text='@titleMenu.Name' image='@Url.Content("~/content/ScriptsNew/Images/vista/gif/folder.gif")'>
+                            @foreach (var menu in menuGroup)
+                            {
+                                <treenode name='id_@(menu.ID)' text='@menu.Name' value='@Response.ApplyAppPathModifier(menu.Url)' image='@Url.Content("~/content/ScriptsNew/Images/16/mark.gif")' href='javascript:void(0)' target='main'></treenode>
+                            }
+                        </treenode>
+                    }
+                }
+            }
+
+        </treeview>
+    </div>
+    <script type="text/javascript">        init();</script>
+    <script type="text/javascript" src="@Url.Content("~/content/ScriptsNew/Root.TreeView.js?v=20140603")"></script>
+</body>
+</html>

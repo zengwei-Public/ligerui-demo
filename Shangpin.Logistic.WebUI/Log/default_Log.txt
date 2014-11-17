@@ -1,0 +1,27 @@
+2014-06-03 14:02:34,705 [7] ERROR default_Log [(null)] - AuthTicket解密异常，登陆失败
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 Shangpin.Logistic.Model.Basic.UserContext.GetAuthUser() 位置 d:\Git Wms\Shangpin.Logistic\Shangpin.Logistic.Model\Basic\UserContext.cs:行号 43
+2014-06-03 14:02:56,714 [8] ERROR default_Log [(null)] - AuthTicket解密异常，登陆失败
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 Shangpin.Logistic.Model.Basic.UserContext.GetAuthUser() 位置 d:\Git Wms\Shangpin.Logistic\Shangpin.Logistic.Model\Basic\UserContext.cs:行号 43
+2014-06-03 14:03:17,638 [10] ERROR default_Log [(null)] - AuthTicket解密异常，登陆失败
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 Shangpin.Logistic.Model.Basic.UserContext.GetAuthUser() 位置 d:\Git Wms\Shangpin.Logistic\Shangpin.Logistic.Model\Basic\UserContext.cs:行号 43
+2014-06-03 14:04:25,125 [7] ERROR default_Log [(null)] - AuthTicket解密异常，登陆失败
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 Shangpin.Logistic.Model.Basic.UserContext.GetAuthUser() 位置 d:\Git Wms\Shangpin.Logistic\Shangpin.Logistic.Model\Basic\UserContext.cs:行号 43
+2014-06-03 16:16:31,568 [9] ERROR default_Log [(null)] - AuthTicket解密异常，登陆失败
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 Shangpin.Logistic.Model.Basic.UserContext.GetAuthUser() 位置 d:\Git Wms\Shangpin.Logistic\Shangpin.Logistic.Model\Basic\UserContext.cs:行号 43
+2014-06-19 11:16:32,413 [6] ERROR default_Log [(null)] - AuthTicket解密异常，登陆失败
+System.Exception: 反序列化失败,原因:无法加载进行反序列化所需的类型 Shangpin.Logistic.Model.Base.UserModel。
+   在 Shangpin.Logistic.Util.SerializationUtil.DesrializeToObject[T](String str) 位置 d:\Git Wms\public\Shangpin.Logistic.Util\SerializationUtil.cs:行号 75
+   在 Shangpin.Logistic.Model.Basic.UserContext.GetAuthUser() 位置 d:\Git Wms\public\Shangpin.Logistic.Model\Basic\UserContext.cs:行号 44
+2014-07-10 19:30:03,136 [6] ERROR default_Log [(null)] - AuthTicket解密异常，登陆失败
+System.Exception: 反序列化失败,原因:无法加载进行反序列化所需的类型 Shangpin.Logistic.Model.Base.UserModel。
+   在 Shangpin.Logistic.Util.SerializationUtil.DesrializeToObject[T](String str) 位置 d:\Git Wms\public\Shangpin.Logistic.Util\SerializationUtil.cs:行号 75
+   在 Shangpin.Logistic.Model.Basic.UserContext.GetAuthUser() 位置 d:\Git Wms\public\Shangpin.Logistic.Model\Basic\UserContext.cs:行号 44
+2014-07-11 11:55:42,555 [5] ERROR default_Log [(null)] - AuthTicket解密异常，登陆失败
+System.Exception: 反序列化失败,原因:无法加载进行反序列化所需的类型 Shangpin.Logistic.Model.Base.UserModel。
+   在 Shangpin.Logistic.Util.SerializationUtil.DesrializeToObject[T](String str) 位置 d:\Git Wms\public\Shangpin.Logistic.Util\SerializationUtil.cs:行号 75
+   在 Shangpin.Logistic.Model.Basic.UserContext.GetAuthUser() 位置 d:\Git Wms\public\Shangpin.Logistic.Model\Basic\UserContext.cs:行号 44

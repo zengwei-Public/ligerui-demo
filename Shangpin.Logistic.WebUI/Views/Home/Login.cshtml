@@ -1,0 +1,102 @@
+﻿@model Shangpin.Logistic.WebUI.Models.LogOnModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <title>尚品TMS系统 - 登陆</title>
+    <link href="@Url.Content("~/Content/page_frame.css?" + DateTime.Now.ToString("yyyyMMdd"))" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        html, body {
+            height: 100%;
+            width: 100%;
+            min-width: 1000px;
+            margin: 0px;
+            overflow-y: hidden;
+            padding: 0;
+        }
+    </style>
+    <script src="@Url.Content("~/Scripts/jquery-1.8.2.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            if (window.top != window) {
+                top.location = "@Url.Action("GoLogin")";
+            }
+            $("#UserName").focus();
+        });
+    </script>
+</head>
+<body class="login_body">
+    <div class="login_main">
+        @using (Html.BeginForm())
+        {
+            <div class="login_error">
+                @Html.ValidationSummary()
+
+            </div>
+            <div class="login_region">
+			    
+			   <div class="login_region_bg">
+			   <div class="login_table_wrap">
+			  <table>
+                    <tr>
+                        <th>
+                            @Html.LabelFor(m => m.UserName)：
+                        </th>
+                        <td>
+                            @Html.TextBoxFor(m => m.UserName, new { @class = "tbx" })
+                            @Html.ValidationMessageFor(m => m.UserName, " ")
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            @Html.LabelFor(m => m.Password)：
+                        </th>
+                        <td>
+                            @Html.PasswordFor(m => m.Password, new { @class = "tbx" })
+                            @Html.ValidationMessageFor(m => m.Password, " ")
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            @Html.LabelFor(m => m.VerificationCode)：
+                        </th>
+                        <td>
+                            @Html.TextBoxFor(m => m.VerificationCode, new { @class = "tbx short" })
+                            @Html.ValidationMessageFor(m => m.VerificationCode, " ")
+                            <img title="点击更换验证码" src="@Url.Action("GenerateVerificationCode")" style="vertical-align:middle; cursor:pointer;" onclick="this.src=this.src+'?'+Math.random()" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                        </th>
+                        <td>
+                            @Html.CheckBoxFor(m => m.RememberMe)
+                            @Html.LabelFor(m => m.RememberMe)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                        </th>
+                        <td class="left">
+                            <input class="btn_login" type="submit" value="  " />
+                        </td>
+                    </tr>
+                </table>
+				</div>
+				</div>
+            </div>
+            <div class="copyright">
+                版权所有 Copyright 2014-2015  All Rights Reserved
+            </div>
+            <div style="text-align: center; color: Red; position:absolute; left:600px; bottom:5px; ">
+                <span id="tip"></span>
+            </div>
+        }
+    </div>
+</body>
+</html>

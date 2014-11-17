@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style type="text/css">
+        .out_box
+        {
+            border: 1px solid #ccc;
+            background: #fff;
+            font: 12px/20px Tahoma;
+        }
+        .list_box
+        {
+            border-bottom: 1px solid #eee;
+            padding: 0 5px;
+            cursor: pointer;
+        }
+        .focus_box
+        {
+            background: #f0f3f9;
+        }
+        .mark_box
+        {
+            color: #c00;
+        }
+    </style>
+    <!--    <link href="autocomplete.css" rel="stylesheet" type="text/css" />-->
+    <link href="../textbox/textbox.css" rel="stylesheet" type="text/css" />
+    <script src="../../lib/jquery-1.7.1.min.js" type="text/javascript"></script>
+    <script src="../../extends/url.extend.js" type="text/javascript"></script>
+    <script src="../textbox/jquery.textbox.js" type="text/javascript"></script>
+    <script src="../textbox/jquery.watermark.js" type="text/javascript"></script>
+    <script src="jquery.autocomplete.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            /*
+            $("#customTest").autocomplete({
+            boxClass: "out_box", //外部box样式
+            listClass: "list_box", //默认的列表样式
+            focusClass: "focus_box", //列表选样式中
+            markCalss: "mark_box", //高亮样式
+            autoClass: false,
+            textHint: true, //提示文字自动隐藏
+            hintText: "请输入邮箱地址"
+            }).textbox();*/
+            $(".textbox").textbox();
+            //            .autocomplete({
+            //                boxClass: "out_box", //外部box样式
+            //                listClass: "list_box", //默认的列表样式
+            //                focusClass: "focus_box", //列表选样式中
+            //                markCalss: "mark_box", //高亮样式
+            //                autoClass: false,
+            //                textHint: true, //提示文字自动隐藏
+            //                hintText: "请输入邮箱地址"
+            //            });
+        })
+    </script>
+</head>
+<body>
+    <div style="height: 40px">
+     <input id="txtStart" type="text" class="date textbox" label="申请时间" />
+        <input id="txtEnd" type="text" class="date textbox" label="到" />
+        <input id="txtDeparture" type="text" class="drop textbox" label="出发地" watermark="请点击选择出发地"
+            maxlength="10" />
+        <input type="text" id="customTest" size="28" class="mail textbox" label="邮箱" /></div>
+</body>
+</html>

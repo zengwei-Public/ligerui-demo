@@ -1,0 +1,14 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title>尚品物流管理系统</title>
+</head>
+<frameset cols="200,8,*" id="Navigation" frameborder="0" border="0">
+    <frame name="menu" src="@Url.Action("Menu","Frame")" frameborder="0">
+    <frame name="menu" src="@Url.Action("LeftLine","Frame")" frameborder="0">
+        <frameset rows="4,*" frameborder="0" border="0">
+            <frame name="header" src="@Url.Action("TopLine","Frame")" frameborder="0">
+            <frame name="main" src="@Url.Action("TabPage", "Frame")" frameborder="0" id="main">
+        </frameset>
+</frameset>
+</html>

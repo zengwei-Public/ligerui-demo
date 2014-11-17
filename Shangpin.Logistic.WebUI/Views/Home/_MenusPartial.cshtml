@@ -1,0 +1,30 @@
+﻿@{
+    Layout = null;
+}
+
+<ul class="menulist">
+    @{
+        if (Model == null || Model.Count <= 0) { return; }
+
+        foreach (Shangpin.Logistic.Model.Basic.MenuModel mm in Model)
+        {
+            <li>
+                <span url="@Url.Content(mm.Url)" menuno="@mm.ID" style="padding-left:@(24+((mm.MenuLevel-1)*15))px;">
+                    @if (@mm.Children != null && @mm.Children.Count > 0)
+                    {
+                        <img id="menuImg_@mm.ID" style="left:@(10 + ((mm.MenuLevel - 1) * 15))px;" src="~/Content/images/closeico.gif" />
+                    }
+                    @mm.Name
+                </span>
+                <div class="menuitem-l"></div>
+                <div class="menuitem-r"></div>
+                @if (@mm.Children != null && @mm.Children.Count > 0)
+                {
+                    <div id="children@(mm.ID)" class="close">
+                        @{Html.RenderPartial("_MenusPartial", @mm.Children);}
+                    </div>
+                }
+            </li>
+        }
+    }
+</ul>
